@@ -6,6 +6,7 @@ BROUILLON : PROJET MATHS-INFO
 import functions.generate as generate
 import algorithms.neighbor as neighbor
 import algorithms.insertion as insertion
+import algorithms.twoopt as twoopt
 
 ### MAIN ###
 distance_matrix = generate.distance_matrix(10)
@@ -19,3 +20,7 @@ print(f'Route la plus courte pour l\'algorithme " Nearest Neighbor " : \n{algo1}
 
 algo2 = insertion.insertion_heuristique(distance_matrix)
 print(f'Route la plus courte pour l\'algorithme " Insertion " : \n{algo2}')
+
+#Choix du chemin de Nearest Neighbor pour le calcul de cette heuristique
+algo3 = twoopt.two_opt(algo1, distance_matrix)
+print(f'Route la plus courte pour l\'algorithme " Two Opt " : \n{algo3}')
