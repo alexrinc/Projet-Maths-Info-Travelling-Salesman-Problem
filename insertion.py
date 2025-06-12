@@ -1,6 +1,4 @@
-### IMPORTS ###
-
-import math
+#Code de l'heuristique d'insertion minimale
 
 def calcul_du_cout(chemin, matrice):
     """ 
