@@ -1,0 +1,1 @@
+### Fonction qui testera la qualité et les performances d'un algorithme TSP ###
