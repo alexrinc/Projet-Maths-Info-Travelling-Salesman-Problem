@@ -3,9 +3,9 @@ BROUILLON : PROJET MATHS-INFO
 """
 
 ### IMPORTS ###
-import generate
-import neighbor
-import insertion
+import functions.generate as generate
+import algorithms.neighbor as neighbor
+import algorithms.insertion as insertion
 
 ### MAIN ###
 distance_matrix = generate.distance_matrix(10)

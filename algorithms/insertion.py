@@ -45,6 +45,7 @@ def insertion_heuristique(matrice_villes):
         chemin.insert(meilleure_position, ville_ainserer)
         non_visitees.remove(ville_ainserer)
 
+    chemin.append(chemin[0])
     return chemin
 
 
