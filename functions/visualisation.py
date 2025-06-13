@@ -21,13 +21,13 @@ def plot_path(coord, paths, names):
         
         # --- Visualisation du chemin obtenu ---
         #plt.figure(figsize=(8,6))
-        ax.plot(x_path, y_path, 'bo-', label ='Chemin TSP', markersize=5)  #b --> couleur bleue; o --> marqueur cercle ; "-" --> relié par des lignes 
+        ax.plot(x_path, y_path, 'ro-', label ='Chemin TSP', markersize=5)  #b --> couleur bleue; o --> marqueur cercle ; "-" --> relié par des lignes 
         
         # --- Affichage des numéros de villes ---
         # On parcourt les coordonnées originales pour placer chaque numéros
         for i, (x,y) in enumerate(coord):
             #Affiche le numéro de la ville 'i' (on décale un peu pour la lisibilité)
-            ax.text(x,y + 0.05, str(i), color='red', fontsize=12, ha='center')
+            ax.text(x,y + 0.05, str(i), color='blue', fontsize=12, ha='center')
 
         # Mise en évidence du point de départ
         start_city_coords = coord[path[0]]
