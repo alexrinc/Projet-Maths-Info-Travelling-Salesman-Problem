@@ -26,5 +26,8 @@ def distance_matrix(matrix_size): # => Nombre de villes
     for i, ville1 in enumerate(villes):
         for j, ville2 in enumerate(villes):
             distance_matrix[i][j] = ville1.distance_to(ville2)
+
+    #TEST : retour des coordonénes pour tester la visualisation
+    coords = [(v.x, v.y) for v in villes]
     
-    return distance_matrix
+    return distance_matrix, coords
