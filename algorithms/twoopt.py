@@ -19,10 +19,14 @@ def two_opt(path, dist_matrix):
     Renvoie un chemin amélioré à l'aide de 2-permutations (inversion d'arête)
     """
     n = len(path)
-    improve = True #Initialisation du booléen d'amélioration à Vrai
-    
-    while improve:
+    improve = True              #Initialisation du booléen d'amélioration à Vrai
+
+    max_iterations = 1000       #Maximum d'itération avant arrêt de l'algorithme
+    iteration = 0               #Comptage d'itération
+
+    while improve and iteration < max_iterations:         #Evite que le calcul ne boucle trop longtemps lorsque la solution initiale est mauvaise
         improve = False
+        iteration += 1
     
         for i in range(n-1):
                 for j in range(i+2, n if i>0 else n-1):   #Empêche les inversions invalides
@@ -32,7 +36,10 @@ def two_opt(path, dist_matrix):
                     #Calcul du gain de distance
                     delta = -dist_matrix[a][b] -dist_matrix[c][d] + dist_matrix[a][c] + dist_matrix[b][d]
 
-                    if delta < 0: #Si delta <0 alors le chemin est plus court, on procède à l'échange
+                    if delta < 0 : #Si delta est signifcativement négatif alors le chemin est plus court, on procède à l'échange
                         path[i+1:j+1] = reversed(path[i+1:j+1])
                         improve = True
+
+        if iteration >= max_iterations :
+             print(f"Avertissement : Arret apres {iteration} iterations, limite maximum\n")
     return path
