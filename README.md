@@ -11,7 +11,7 @@ Implémenter en Python des solutions heuristiques pour le problème du TSP (Trav
 
 ## Heuristiques abordées dans le cadre du projet
 * Nearest Neighbor
-* Nearest Insertion
+* Cheapest Insertion
 * 2-opt
 * Simulated Annealing
 

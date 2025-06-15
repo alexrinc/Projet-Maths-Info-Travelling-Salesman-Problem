@@ -1,7 +1,7 @@
 import math
 import random
 
-def total_distance(route, coords):
+def total_distance(route, coords): # à enlever ? Redondance avec quality
     dist = 0
     for i in range(len(route)):
         ville1 = coords[route[i]]
@@ -17,7 +17,7 @@ def simulated_annealing(coords, path, initial_temp, cooling_rate):
     best_distance = current_distance
 
     T = initial_temp
-    max_iterations = 10000
+    max_iterations = 50000
 
     for iteration in range(max_iterations):
         # 2-opt
