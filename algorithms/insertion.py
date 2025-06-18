@@ -1,15 +1,5 @@
 #Code de l'heuristique d'insertion minimale
-
-def path_cost(path, matrix):
-    """ 
-    Calcule la longueur totale d'un chemin fermé donc retour à la ville de départ
-    à partir d'un chemin donné et d'une matrice de distance
-
-    --- Version compactée de la fonction "path_length_matrix" ---
-
-    """
-    return sum(matrix[path[i]][path[(i + 1) % len(path)]] for i in range(len(path)))
-
+import functions.distance as distance
 
 def cheapest_insertion(dist_matrix):
     """
@@ -35,7 +25,7 @@ def cheapest_insertion(dist_matrix):
         for v in unvisited:                                 #Insertion de chaque ville restantes une à une
             for i in range(len(path)):
                 test_path = path[:i+1] + [v] + path[i+1:]   #Création d'un nouveau chemin hypothétique ave la ville v
-                new_cost = path_cost(test_path, dist_matrix)
+                new_cost = distance.total_path_distance(test_path, dist_matrix)
 
                 #Si l'insertion donne un meilleur cout alors on la garde en mémoire comme meilleure option
                 if new_cost < best_cost:

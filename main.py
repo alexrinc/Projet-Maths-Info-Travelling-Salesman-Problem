@@ -10,6 +10,7 @@ import algorithms.twoopt as twoopt
 import algorithms.annealing as annealing
 import functions.visualisation as vs
 import functions.quality as qc
+import functions.distance as distance
 
 ### MAIN ###
 distance_matrix, coords = generate.distance_matrix(50)
@@ -19,7 +20,7 @@ print(distance_matrix)
 print("\n")
 
 algo1 = neighbor.nearest_neighbor(distance_matrix)
-lower_bound = qc.total_path_distance(algo1, distance_matrix) # Référence pour les autres algorithmes
+lower_bound = distance.total_path_distance(algo1, distance_matrix) # Référence pour les autres algorithmes
 qc.evaluate_quality("Nearest Neighbor", algo1, distance_matrix, lower_bound)
 
 algo2 = insertion.cheapest_insertion(distance_matrix)

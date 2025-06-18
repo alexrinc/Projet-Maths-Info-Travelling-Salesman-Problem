@@ -1,17 +1,6 @@
 #Code permettant de résoudre le TSP avec la méthode 2-opt
 #Se basant sur des 2-permutations
 
-def path_length_matrix(path, dist_matrix):
-    """
-    Calcule la longueur totale d'un chemin donné en fonction d'une matrice de distance
-    """
-    tot = 0                                #Valeur initialisée à 0
-    for i in range(len(path)):
-        first = path[i]
-        second = path[(i+1)%len(path)]     #Format = (i+1) mod longueur du chemin car parcours cyclique
-        tot += dist_matrix[first][second]  #Ajout de la distance entre deux villes au total
-    return tot 
-
 def two_opt(path, dist_matrix):
     """
     METHODE 2-OPT : Amélioration d'un chemin du TSP
