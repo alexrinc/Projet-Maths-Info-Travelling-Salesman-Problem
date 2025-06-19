@@ -4,7 +4,7 @@ def plot_path(coord, paths, names):
     """
     Visualisation des chemins obtenus avec :
         coord = Liste des coordonnées
-        path = Ordre des villes visités 
+        path = Ordre des villes visitées 
         name = nom de la technique utilisée
     
     """
@@ -16,7 +16,7 @@ def plot_path(coord, paths, names):
     for ax, path, name in zip(axis, paths, names):
         path_coords = [coord[i] for i in path] + [coord[path[0]]]
         
-        # Séparation des coordonnées x et y pour créer deux listes avec chacunes d'entre elles
+        # Séparation des coordonnées x et y pour créer deux listes avec chacune d'entre elles
         x_path, y_path = zip(*path_coords)
         
         # --- VISUALISATION DU CHEMIN OBTENU ---
