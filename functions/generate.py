@@ -1,12 +1,6 @@
 import numpy as np
 import random
 
-
-### Génération d'un ensemble de villes et la distance entre elles ###
-## Peut être généré en faisant une matrice tel que pour la i-ème ville et j-ième ville on ait 
-# [len(i,i) = 0, len(i,j), len(i,j+1) ... ]
-# [len(j,i), len(j,j) = 0, len(j,j+1) ... ]
-
 class City:
     
     def __init__(self, x, y, id):
@@ -25,7 +19,7 @@ def distance_matrix(matrix_size):
         for j, city2 in enumerate(cities):
             distance_matrix[i][j] = city1.distance_to(city2)                                       # Calcule des distances entre chaques villes
 
-    # Retour des coordonénes pour la visualisation
+    # Retour des coordonénes des villes pour la visualisation
     coords = [(v.x, v.y) for v in cities]
     
     return distance_matrix, coords

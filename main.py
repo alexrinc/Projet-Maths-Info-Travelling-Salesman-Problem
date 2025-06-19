@@ -18,7 +18,8 @@ distance_matrix, coords = generate.distance_matrix(50)
 print("Matrice des distances entre les villes: \n")
 print(distance_matrix)
 print("\n")
-
+print("Note : si le pourcentage est négatif il y a amélioration, si le pourcentage est positif alors il y a dégradation par rapport à Nearest Neighbor.")
+    
 algo1 = neighbor.nearest_neighbor(distance_matrix)
 lower_bound = distance.total_path_distance(algo1, distance_matrix) # Référence pour les autres algorithmes
 qc.evaluate_quality("Nearest Neighbor", algo1, distance_matrix, lower_bound)
