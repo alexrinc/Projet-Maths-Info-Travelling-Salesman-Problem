@@ -1,65 +1,37 @@
 import math
 import random
 
-def total_distance(route, coords): # à enlever ? Redondance avec quality
-    dist = 0
-    for i in range(len(route)):
-        ville1 = coords[route[i]]
-        ville2 = coords[route[(i + 1) % len(route)]]
-        dist += math.sqrt((ville1[0] - ville2[0]) ** 2 + (ville1[1] - ville2[1]) ** 2)
-    return dist
+def simulated_annealing(distance_matrix, path, lower_bound, initial_temperature, final_temperature, cooling_rate):
+    """
+    MÉTHODE DU RECUIT SIMULÉ :
+    Technique inspirée de la métallurgie acceptant temporairement des solutions moins bonnes pour éviter les minimas locaux.
+    Implique l'aléatoire et une diminution de la température au fil des itérations puis se base sur le 2-opt pour la permutation des arêtes.
+    """
+    n = len(path)
+    best_length = lower_bound
+    best_path = path
+    T = initial_temperature
+    iteration = 0
+    while T > final_temperature:
+        i = random.randint(0, n-1)              # La première ville est choisie au hasard
+        j = (i + random.randint(2, n-2)) % n    # La deuxième ville est également choisie au hasard et forcément différente de la première
+        if j < i:
+            i, j = j, i                         # j est toujours après i dans l'ordre du chemin
+            
+        delta = distance_matrix[path[i]][path[j]] + distance_matrix[path[i+1]][path[(j+1) % n]]\
+                - distance_matrix[path[i]][path[i + 1]] - distance_matrix[path[j]][path[(j + 1) % n]] # Calcule la variation de la longueur totale du chemin s'il y a une inversion
+                
+        if delta < 0 or math.exp(-delta / T) > random.random():             # Si delta négatif, amélioration donc on accepte, sinon on accepte en fonction de delta et de la température
+            lower_bound = lower_bound + delta
+            for k in range((j - i) // 2):
+                path[k + i + 1], path[j - k] = path[j - k], path[k + i + 1] # Inversion d'arête venant du 2-opt
 
-def simulated_annealing(coords, path, initial_temp, cooling_rate):   
-    current_path = path
-    current_distance = total_distance(current_path, coords)
+        # Vérifie s'il y a une amélioration de la solution
+        if best_length > lower_bound:
+            best_length = lower_bound
+            best_path = path
+        iteration += 1
+        if iteration % (n * n) == 0:
+            T *= cooling_rate # Réduction de la température
 
-    best_path = current_path[:]
-    best_distance = current_distance
-
-    T = initial_temp
-    max_iterations = 50000
-
-    for iteration in range(max_iterations):
-        # 2-opt
-        i = random.randint(0, len(coords) - 2)
-        k = random.randint(i + 1, len(coords) - 1)
-        
-        new_path = current_path[:i] + current_path[i:k+1][::-1] + current_path[k+1:]
-        new_distance = total_distance(new_path, coords)
-        delta = new_distance - current_distance
-        
-        # Est-ce une meilleure solution ?
-        if delta < 0 or random.random() < math.exp(-delta / T):
-            current_path = new_path
-            current_distance = new_distance
-            # Mise à jour de la meilleure solution
-            if new_distance < best_distance:
-                best_path = new_path
-                best_distance = new_distance
-
-        # Réduit la température.
-        T *= cooling_rate
-        
-        """ if iteration % 1000 == 0: # Pour suivre l'avancée
-            print(f"Iteration {iteration}: distance actuelle = {current_distance:.4f}, meilleure distance = {best_distance:.4f}") """
-
-    index = best_path.index(0)                          # L'index de la ville 0
-    best_path = best_path[index:] + best_path[:index]   # On réarrange le chemin pour commencer par la ville 0 (le chemin reste le même)
-    best_path.append(0)                                 # Retour à la ville de départ (0)
-    return best_path, best_distance
-
-if __name__ == '__main__': # TEST
-    nb_villes = 10
-    cities = [(random.uniform(0, 100), random.uniform(0, 100)) for _ in range(nb_villes)]
-    
-    # Haute température de départ pour une exploration large des solutions, refroidissement lent pour une convergence graduelle
-    initial_temp = 10000
-    cooling_rate = 0.995
-    
-    path = [0, 2, 9, 3, 7, 6, 5, 1, 4, 8]
-    
-    best_path, best_distance = simulated_annealing(cities, path, initial_temp, cooling_rate)
-    
-    print("\nBest path :")
-    print(best_path)
-    print(f"Total distance: {best_distance:.4f}")
+    return best_path, best_length

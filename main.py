@@ -34,12 +34,13 @@ algo3 = twoopt.two_opt(path, distance_matrix)
 qc.evaluate_quality("2-Opt", algo3, distance_matrix, lower_bound)
 
 # Paramètres de Simulated Annealing
-initial_temperature = 10000
+initial_temperature = 5000
 cooling_rate = 0.995
+path = algo1.copy()
 path.pop() # On enlève le dernier 0 de Nearest Neighbor pour éviter les doublons
 
-algo4_path, algo4_length = annealing.simulated_annealing(coords, path, initial_temperature, cooling_rate)
+algo4_path, algo4_length = annealing.simulated_annealing(distance_matrix, path, lower_bound, initial_temperature, 0.001, cooling_rate)
 qc.evaluate_quality("Simulated Annealing", algo4_path, distance_matrix, lower_bound)
 
-# Affichage sur la même figure des visualisations des 3 heuristiques
+# Affichage sur la même figure des visualisations des 4 heuristiques
 vs.plot_path(coords, [algo1, algo2, algo3, algo4_path], ["Nearest Neighbor", "Insertion", "Two Opt", "Simulated Annealing"])

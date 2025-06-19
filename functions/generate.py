@@ -1,33 +1,31 @@
 import numpy as np
-from dataclasses import dataclass
 import random
 
 
 ### Génération d'un ensemble de villes et la distance entre elles ###
 ## Peut être généré en faisant une matrice tel que pour la i-ème ville et j-ième ville on ait 
 # [len(i,i) = 0, len(i,j), len(i,j+1) ... ]
-# [len(j,i), len(j,j) = 0, len(j+1,j+1) ... ]
+# [len(j,i), len(j,j) = 0, len(j,j+1) ... ]
 
-@dataclass
-class Ville:
+class City:
     
     def __init__(self, x, y, id):
         self.x = x
         self.y = y
         self.id = id
 
-    def distance_to(self, other: 'Ville'):
-        return np.sqrt((self.x - other.x)**2 + (self.y - other.y)**2)
+    def distance_to(self, other: 'City'):
+        return np.sqrt((self.x - other.x)**2 + (self.y - other.y)**2)   # Distance euclidienne entre deux villes en fonction des coordonnées
 
-def distance_matrix(matrix_size): # => Nombre de villes
-    villes = [Ville(random.randrange(0, 100), random.randrange(0, 100), i) for i in range(matrix_size)] #uniform -> randrange pour du int au lieu de float
-    distance_matrix = np.zeros((len(villes), len(villes)))
+def distance_matrix(matrix_size):
+    cities = [City(random.uniform(0, 100), random.uniform(0, 100), i) for i in range(matrix_size)] # Liste contenant n villes (selon matrix_size) avec des coordonnées aléatoires
+    distance_matrix = np.zeros((len(cities), len(cities)))                                         # La matrice est remplie de 0 pour l'initialiser
 
-    for i, ville1 in enumerate(villes):
-        for j, ville2 in enumerate(villes):
-            distance_matrix[i][j] = ville1.distance_to(ville2)
+    for i, city1 in enumerate(cities):
+        for j, city2 in enumerate(cities):
+            distance_matrix[i][j] = city1.distance_to(city2)                                       # Calcule des distances entre chaques villes
 
-    #TEST : retour des coordonénes pour tester la visualisation
-    coords = [(v.x, v.y) for v in villes]
+    # Retour des coordonénes pour la visualisation
+    coords = [(v.x, v.y) for v in cities]
     
     return distance_matrix, coords
