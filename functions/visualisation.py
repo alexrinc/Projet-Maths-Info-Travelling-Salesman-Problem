@@ -19,11 +19,11 @@ def plot_path(coord, paths, names):
         # Séparation des coordonnées x et y pour créer deux listes avec chacunes d'entre elles
         x_path, y_path = zip(*path_coords)
         
-        # --- Visualisation du chemin obtenu ---
+        # --- VISUALISATION DU CHEMIN OBTENU ---
         #plt.figure(figsize=(8,6))
-        ax.plot(x_path, y_path, 'ro-', label ='Chemin TSP', markersize=5)  #b --> couleur bleue; o --> marqueur cercle ; "-" --> relié par des lignes 
+        ax.plot(x_path, y_path, 'ro-', label ='Chemin TSP', markersize=5)  #r --> rouge ; o --> marqueur cercle ; "-" --> relié par des lignes 
         
-        # --- Affichage des numéros de villes ---
+        # --- AFFICHAGE DES NUMEROS DE VILLES ---
         # On parcourt les coordonnées originales pour placer chaque numéros
         for i, (x,y) in enumerate(coord):
             #Affiche le numéro de la ville 'i' (on décale un peu pour la lisibilité)
@@ -39,8 +39,8 @@ def plot_path(coord, paths, names):
         ax.set_xlabel("Coordonnée x")       #Axe des x
         ax.set_ylabel("Coordonnée y")       #Axe des y
         ax.legend()
-        ax.grid(True)                   #Grille
-        ax.axis('equal')                #Evite les distorsions
+        ax.grid(True)                       #Grille pour permettre une meilleure représentation des chemins
+        ax.axis('equal')                    #Evite les distorsions des axes x et y 
     
     plt.tight_layout()
-    plt.show()                       #Affichage de la fenêtre
+    plt.show()                              #Affichage de la fenêtre
