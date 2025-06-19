@@ -2,7 +2,7 @@ import functions.distance as distance
 
 def cheapest_insertion(distance_matrix):
     """
-    METHODE D'INSERTION : 
+    METHODE D'INSERTION :
     Construit une solution approchée du TSP par heuristique d'insertion
 
     La fonction prend en entrée une matrice carrée des distances entre les villes et

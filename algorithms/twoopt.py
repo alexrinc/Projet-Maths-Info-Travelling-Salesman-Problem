@@ -10,10 +10,10 @@ def two_opt(path, distance_matrix):
     n = len(path)
     improve = True              #Initialisation du booléen d'amélioration à Vrai
 
-    max_iterations = 1000       #Maximum d'itération avant arrêt de l'algorithme
-    iteration = 0               #Comptage d'itération
+    max_iterations = 1000       #Maximum d'itérations avant arrêt de l'algorithme
+    iteration = 0               #Comptage d'itérations
 
-    while improve and iteration < max_iterations:         #Evite que le calcul ne boucle trop longtemps lorsque la solution initiale n'est pas du tout optimale
+    while improve and iteration < max_iterations:         #Evite que le calcul ne boucle trop longtemps notamment lorsque la solution intiale est de mauvaise qualité
         improve = False
         iteration += 1
     
