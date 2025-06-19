@@ -1,9 +1,7 @@
-#Code permettant de résoudre le TSP avec la méthode 2-opt
-#Se basant sur des 2-permutations
-
 def two_opt(path, distance_matrix):
     """
     METHODE 2-OPT : Amélioration d'un chemin du TSP
+    
     Prend en entrée un chemin (une liste d'indices) et une matrice de distance
     Renvoie un chemin amélioré à l'aide de 2-permutations (inversion d'arête)
     """
@@ -30,5 +28,5 @@ def two_opt(path, distance_matrix):
                         improve = True
 
         if iteration >= max_iterations :                 #Condition permettant d'éviter de rallonger le calcul lorsque la solution initale n'est pas du tout optimale 
-             print(f"Avertissement : Arret apres {iteration} iterations, limite maximum\n")
+             print(f"AVERTISSEMENT : Arret apres {iteration} iterations, limite maximum atteinte\n")
     return path

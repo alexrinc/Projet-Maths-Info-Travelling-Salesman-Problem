@@ -26,7 +26,7 @@ def cheapest_insertion(distance_matrix):
                 test_path = path[:i+1] + [v] + path[i+1:]   #Création d'un nouveau chemin hypothétique avec la ville v
                 new_cost = distance.total_path_distance(test_path, distance_matrix)
 
-                #Si l'insertion donne un cout plus optimal alors on la garde en mémoire comme meilleure option
+                #Si l'insertion donne un cout plus optimal alors conservation en mémoire comme meilleure option
                 if new_cost < best_cost:
                     best_cost = new_cost    
                     best_place = i+1
@@ -36,7 +36,7 @@ def cheapest_insertion(distance_matrix):
         path.insert(best_place, to_insert)
         unvisited.remove(to_insert)
 
-    path.append(path[0])
+    path.append(path[0])  #Ajout de la première ville à la fin pour fermer le chemin
     return path
 
 
